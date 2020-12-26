@@ -45,5 +45,16 @@ public:
 	}
 	
 	}
-
+	template<typename O>
+	bool operator==(const O other) const {
+		if (this->size() != other.size()) {
+			return false;
+		}
+		for (size_t i = 0; i < other.size(); i++) {
+			if ((*this)[i] != other[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
 };

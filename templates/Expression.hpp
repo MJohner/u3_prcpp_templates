@@ -20,8 +20,21 @@ public:
 		os << e[e.size() - 1] << "]";
 		return os;
 	}
+
 	value_type operator[](size_t i) const{
 		return Op::template apply<value_type>(m_left[i], m_right[i]);
+	}
+	template<typename O>
+	bool operator==(const O other) const {
+		if (this->size() != other.size()) {
+			return false;
+		}
+		for (size_t i = 0; i < other.size(); i++) {
+			if ((*this)[i] != other[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 };
 
