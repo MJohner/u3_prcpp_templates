@@ -28,6 +28,16 @@ public:
 		return e.apply();
 	}
 
+	Vector operator*(Vector& r) {
+		Expression<Vector,Mul, Vector> e = Expression<Vector, Mul, Vector>(*this, r);
+		return e.apply();
+	}
+
+	Vector operator/(Vector& r) {
+		Expression<Vector, Div, Vector> e = Expression<Vector, Div, Vector>(*this, r);
+		return e.apply();
+	}
+
 	void print() {
 		for (int i = 0; i < this->size(); i++) {
 			std::cout << (*this)[i] << ' ';
