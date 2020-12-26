@@ -3,40 +3,41 @@
 #include <iostream>
 #include "Expression.hpp"
 #include "Ops.hpp"
+#include <iostream>
 
-template <typename T, int S>
+template <typename T, size_t S>
 class Vector : public std::array<T, S> {
 
-protected:
 
 public:
 	Vector(const std::initializer_list<T>& data) {
 		size_t s = __min(data.size(), S);
-
 		auto it = data.begin();
-
 		for (size_t i = 0; i < s; i++) this->at(i) = *it++;
 	}
 
-	Vector operator+(Vector& r) {
-		Expression<Vector, Add, Vector> e = Expression<Vector, Add, Vector>(*this, r);
-		return e.apply();
+	Vector() {};
+
+	template<typename Left, typename Op, typename Right>
+	Vector& operator=(const Expression<Left, Op, Right>& e) {
+		if (this->size() == e.size()) {
+			for (size_t i = 0; i < e.size(); i++) {
+				(*this)[i] = e[i];
+			}
+		}
+		return *this;
 	}
 
-	Vector operator-(Vector& r) {
-		Expression<Vector, Sub, Vector> e = Expression<Vector, Sub, Vector>(*this, r);
-		return e.apply();
+	friend std::ostream& operator<<(std::ostream& os, const Vector& v)
+	{
+		os << "[";
+		for (int i = 0; i < v.size()-1; i++) {
+			os << v[i] << ", ";
+		}
+		os << v[v.size() - 1] << "]" ;
+		return os;
 	}
 
-	Vector operator*(Vector& r) {
-		Expression<Vector,Mul, Vector> e = Expression<Vector, Mul, Vector>(*this, r);
-		return e.apply();
-	}
-
-	Vector operator/(Vector& r) {
-		Expression<Vector, Div, Vector> e = Expression<Vector, Div, Vector>(*this, r);
-		return e.apply();
-	}
 
 	void print() {
 		for (int i = 0; i < this->size(); i++) {
