@@ -14,14 +14,14 @@ public:
 	{
 		os << "["; 
 		
-		for (int i = 0; i < e.size() - 1; i++) {
+		for (size_t i = 0; i < e.size() - 1; i++) {
 			os << e[i] << ", ";
 		}
 		os << e[e.size() - 1] << "]";
 		return os;
 	}
 
-	value_type operator[](size_t i) const{
+	typename value_type operator[](size_t i) const{
 		return Op::template apply<value_type>(m_left[i], m_right[i]);
 	}
 	template<typename O>

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../templates/Expression.hpp"
 #include "../templates/vector.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -71,7 +70,7 @@ public:
 
 	}
 #endif
-
+	/*
 #ifdef AUFGABE2
 	// Aufgabe 2
 	TEST_METHOD(VectorScalar) {
@@ -113,7 +112,7 @@ public:
 		A[1] = 0;
 		Assert::IsFalse(e == D);
 	}
-
+	
 	// Aufgabe 2
 	TEST_METHOD(ExprScalar) {
 		Vector<double, 5> A({ 1, 2, 3, 4, 5 });
@@ -133,7 +132,7 @@ public:
 		Assert::IsTrue(B[4] == (25.0 * ((C + B) / A) / 11.0)[4]);
 	}
 #endif
-	/*
+	
 #ifdef AUFGABE3
 	// Aufgabe 3
 	TEST_METHOD(Sum) {
