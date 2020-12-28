@@ -70,7 +70,7 @@ public:
 
 	}
 #endif
-	/*
+	
 #ifdef AUFGABE2
 	// Aufgabe 2
 	TEST_METHOD(VectorScalar) {
@@ -132,7 +132,7 @@ public:
 		Assert::IsTrue(B[4] == (25.0 * ((C + B) / A) / 11.0)[4]);
 	}
 #endif
-	
+	/*
 #ifdef AUFGABE3
 	// Aufgabe 3
 	TEST_METHOD(Sum) {
