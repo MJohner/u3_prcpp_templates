@@ -1,19 +1,36 @@
 #pragma once
 #include "Ops.hpp"
+#include <iostream>
+#include <type_traits>
 template<typename Left, typename Op, typename Right> class Expression {
 	const Left& m_left;
 	const Right& m_right;
-public: 
-	using value_type = typename Left::value_type;
+public:
+	using type = typename std::conditional<std::is_arithmetic_v<Left>,
+		Left,
+		Right>::type;
 
-	Expression(const Left& l, const Right& r) : m_left{ l }, m_right{ r } {}
+	Expression(const Left& l, const Right& r) : m_left{ l }, m_right{ r } {
+	std::cout << typeid(type).name() << std::endl; }
 
 	size_t size() const { return m_left.size(); }
 
-	friend std::ostream& operator<<(std::ostream& os, const Expression& e)
+
+	typename type operator[](size_t i) const{
+		if constexpr (!std::is_arithmetic_v<Left> && !std::is_arithmetic_v<Right>) {
+			return Op::template apply<type>(m_left[i], m_right[i]);
+		}
+		else if constexpr (std::is_arithmetic_v<Left> && !std::is_arithmetic_v<Right>) {
+			return Op::template apply<type>(m_left, m_right[i]);
+		}
+		else if constexpr (!std::is_arithmetic_v<Left> && std::is_arithmetic_v<Right>) {
+			return Op::template apply<type>(m_left[i], m_right);
+		}	
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Expression<Left, Op, Right>& e)
 	{
-		os << "["; 
-		
+		os << "[";
 		for (size_t i = 0; i < e.size() - 1; i++) {
 			os << e[i] << ", ";
 		}
@@ -21,9 +38,6 @@ public:
 		return os;
 	}
 
-	typename value_type operator[](size_t i) const{
-		return Op::template apply<value_type>(m_left[i], m_right[i]);
-	}
 	template<typename O>
 	bool operator==(const O other) const {
 		if (this->size() != other.size()) {

@@ -3,13 +3,13 @@
 #include <iostream>
 #include "Expression.hpp"
 #include "Ops.hpp"
-#include <iostream>
 
 template <typename T, size_t S>
 class Vector : public std::array<T, S> {
 
 
 public:
+	using type = typename T;
 	Vector(const std::initializer_list<T>& data) {
 		size_t s = __min(data.size(), S);
 		auto it = data.begin();
