@@ -8,15 +8,15 @@
 template <typename T, size_t S>
 class Vector : public std::array<T, S> {
 
-
 public:
+
+	Vector() {};
+
 	Vector(const std::initializer_list<T>& data) {
 		size_t s = __min(data.size(), S);
 		auto it = data.begin();
 		for (size_t i = 0; i < s; i++) this->at(i) = *it++;
 	}
-
-	Vector() {};
 
 	template<typename Left, typename Op, typename Right>
 	Vector& operator=(const Expression<Left, Op, Right>& e) {
@@ -38,7 +38,6 @@ public:
 		return os;
 	}
 
-
 	void print() {
 		for (int i = 0; i < this->size(); i++) {
 			std::cout << (*this)[i] << ' ';
@@ -57,6 +56,7 @@ public:
 		return true;
 	}
 };
+
 template<typename T, size_t S>
 T sum(const Vector<T, S>& v, size_t from, size_t to) {
 	T subsum = 0;

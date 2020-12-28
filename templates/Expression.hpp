@@ -42,7 +42,6 @@ public:
 
 	size_t size() const { return m_left.size(); }
 
-
 	typename value_type operator[](size_t i) const {
 		return Op::template apply<value_type>(m_left[i], m_right);
 	}
