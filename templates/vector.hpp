@@ -45,8 +45,7 @@ public:
 	}
 	
 	}
-	template<typename O>
-	bool operator==(const O other) const {
+	bool operator==(const Vector other) const {
 		if (this->size() != other.size()) {
 			return false;
 		}
