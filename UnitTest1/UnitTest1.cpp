@@ -132,7 +132,7 @@ public:
 		Assert::IsTrue(B[4] == (25.0 * ((C + B) / A) / 11.0)[4]);
 	}
 #endif
-	/*
+	
 #ifdef AUFGABE3
 	// Aufgabe 3
 	TEST_METHOD(Sum) {
@@ -154,7 +154,7 @@ public:
 		Assert::IsTrue(13 == sum(A * A, 1, 3));
 	}
 #endif
-
+	/*
 #ifdef AUFGABE4
 	// Aufgabe 4
 	TEST_METHOD(DotProduct) {

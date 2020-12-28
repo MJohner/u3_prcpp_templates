@@ -57,3 +57,16 @@ public:
 		return true;
 	}
 };
+template<typename T, size_t S>
+T sum(const Vector<T, S>& v, size_t from, size_t to) {
+	T subsum = 0;
+	for (; from < to; from++) {
+		subsum += v[from];
+	}
+	return subsum;
+}
+
+template<typename T, size_t S>
+T sum(const Vector<T, S>& v, size_t from = 0) {
+	return sum(v, from, v.size());
+}

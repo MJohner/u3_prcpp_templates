@@ -72,6 +72,20 @@ bool operator==(const L& left, const R& right) {
 	}
 	return true;
 }
+template<typename Left, typename Op, typename Right>
+typename Expression<Left, Op, Right>::value_type sum(Expression<Left, Op, Right>& e, size_t from, size_t to) {
+	typename Expression<Left, Op, Right>::value_type subsum = 0;
+	for (; from < to; from++) {
+		subsum += e[from];
+	}
+	return subsum;
+}
+
+template<typename Left, typename Op, typename Right>
+typename Expression<Left, Op, Right>::value_type sum(Expression<Left, Op, Right>& e, size_t from = 0) {
+	return sum(e, from, e.size());
+}
+
 template<typename Left, typename Right>
 Expression<Left, Add, Right> operator+(const Left& l, const Right& r) {
 	return Expression<Left, Add, Right>(l, r);
